@@ -9,23 +9,28 @@ export default function Gasto({ gasto }) {
 
   return (
     <View>
-      <TouchableOpacity onPress={() =>navigation.navigate('Details', {id: gasto.id}) }>  
-      <Card containerStyle={styles.card}>
-        <View style={styles.row}>
-          <Image style={styles.imagen} source={{uri: gasto.imagen}} />
-          <View>
-            <Text style={styles.nombre}>{gasto.nombre}</Text>
-            <Text style={styles.fecha}>{gasto.fecha}</Text>
-          </View>
-          <Text style={styles.monto}>${gasto.monto}</Text>
-        </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Details', { id: gasto.id })}>
+        <Card containerStyle={styles.card}>
+          <View style={styles.row}>
+            <Image style={styles.imagen} source={{ uri: gasto.imagen }} />
 
-        <Card.Divider />
-        <View style={styles.buttons}>
-          <Button title="Editar" />
-          <Button title="Eliminar" />
-        </View>
-      </Card>
+            <View style={styles.infoContainer}>
+              <Text style={styles.nombre}>{gasto.nombre}</Text>
+              <Text style={styles.fecha}>{gasto.fecha}</Text>
+            </View>
+            <Text style={styles.monto}>${gasto.monto}</Text>
+          </View>
+
+          <Card.Divider />
+          <View style={styles.buttons}>
+            <Button
+              title="✏️ Editar"
+              color="#FFA500" />
+            <Button
+              title="🗑️ Eliminar"
+              color="#FF4500" />
+          </View>
+        </Card>
       </TouchableOpacity>
     </View>
   );
