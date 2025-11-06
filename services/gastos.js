@@ -33,7 +33,7 @@ const generarGasto = (id) => {
   }
 };
 
-const gastos = Array.from({ length: MAX_GASTOS }, (_, i) => generarGasto(i + 1));
+let gastos = Array.from({ length: MAX_GASTOS }, (_, i) => generarGasto(i + 1));
 
 const getGastos = () => {
   return new Promise((resolve) => {
@@ -41,4 +41,46 @@ const getGastos = () => {
   });
 };
 
-export { getGastos };
+const agregarGasto = (gasto) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const nuevoGasto = { ...gasto, id: gastos.length + 1 };
+      gastos.push(nuevoGasto);
+      resolve(nuevoGasto);
+    }, 1000);
+  });
+}
+
+const getGastoById = (id) => {
+   return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(gastos.find((gasto) => gasto.id === id))
+    }, 1000)
+  })
+}
+
+const eliminarGasto = (id) => {
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        gastos = gastos.filter((gasto) => gasto.id !== id)
+        resolve(true)
+      }, 1000)
+    })
+  }
+
+  
+
+const actualizarGasto = (id, gasto) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const gastoActualizado = { ...gasto, id: id }
+      gastos = gastos.map((g) => g.id === id ? { ...g, ...gastoActualizado } : g)
+      resolve(true)
+    }, 1000)
+  })
+}
+
+
+
+
+export { getGastos, agregarGasto, getGastoById, eliminarGasto, actualizarGasto };

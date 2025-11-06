@@ -26,12 +26,6 @@ const styles = StyleSheet.create({
     gap: 10,
     marginTop: 20,
   },
-  generalMensaje: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: '#d4edda',
-    borderRadius: 5,
-  },
 });
 
 export default styles;

@@ -1,59 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { FAB, Divider } from '@rneui/themed';
-import { Icon } from '@rneui/base';
-import { getGastos } from './services/gastos';
-import GastoFlatList from './components/gastoFlatList';
-import GastoForm from './components/gastoForm';
+//import 'react-native-gesture-handler';
+import { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Constants from 'expo-constants'
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';  
+
+import Home from './screens/Home'
+import GastoForm from './screens/Form';
+import Details from './screens/Details';
+
+
+console.log(Constants.statusBarHeigth)
 
 export default function App() {
-  const [gastos, setGastos] = useState([]);
-  const [showForm, setShowForm] = useState(false);
 
-  useEffect(() => {
-    getGastos().then((data) => setGastos(data));
-  }, []);
+const [showForm, setShowForm] = useState(false)
+const Stack = createNativeStackNavigator();
 
   return (
-    <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        {showForm ? (
-          <GastoForm onCancel={() => setShowForm(false)} />
-        ) : (
-          <>
-            <View style={styles.header}>
-              <Text style={styles.titulo}>💸 Mis Gastitos</Text>
-              <View style={styles.iconos}>
-                <Icon name="search" type="font-awesome" color="black" />
-                <Icon name="filter" type="font-awesome" color="black" />
-              </View>
-            </View>
 
-            <Divider />
-            <GastoFlatList gastos={gastos} />
-            <StatusBar style="auto" />
+        <NavigationContainer> 
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={Home} options={{title: 'Listado de Gastos'}}/>
+                <Stack.Screen name="Form" component={GastoForm} options={{title: 'Agregar un gasto nuevo'}}/>
+                <Stack.Screen name="Details" component={Details} options={{title: 'Detalle del gasto'}}/>
+            </Stack.Navigator>
+        </NavigationContainer>
 
-            <View style={styles.fabContainer}>
-              <FAB
-                icon={{ name: 'add', color: 'white' }}
-                placement="bottomRight"
-                color="#2e8b57"
-                onPress={() => setShowForm(true)}
-              />
-            </View>
-          </>
-        )}
       </SafeAreaView>
-    </SafeAreaProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f6f7f8' },
-  header: { flexDirection: 'row', justifyContent: 'space-between', padding: 15 },
-  titulo: { fontSize: 20, fontWeight: 'bold' },
-  iconos: { flexDirection: 'row', gap: 10 },
-  fabContainer: { flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end' },
-});
+const styles = StyleSheet.create ({
+    container: { flex: 1, justifyContent: 'center' },
+})
