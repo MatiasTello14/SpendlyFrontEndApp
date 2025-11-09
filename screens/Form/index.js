@@ -1,4 +1,3 @@
-// --- IMPORTACIONES FUSIONADAS ---
 import { useState, useEffect } from 'react';
 import { View, Text, Button, ScrollView, Switch, ActivityIndicator, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Input } from '@rneui/themed';
@@ -13,9 +12,8 @@ export default function GastoForm() {
   const { gastoData } = useRoute().params || {}
   const navigation = useNavigation()
 
-  // --- ESTADOS FUSIONADOS Y CORREGIDOS ---
-  // Re-introducimos 'nombre' para el título
-  const [nombre, setNombre] = useState(gastoData?.nombre || ''); // <<< TU CAMPO DE NOMBRE
+  
+  const [nombre, setNombre] = useState(gastoData?.nombre || ''); 
   const [categoria, setCategoria] = useState(gastoData?.categoria || '');
   const [fecha, setFecha] = useState(gastoData?.fecha || '');
   const [imagen, setImagen] = useState(gastoData?.imagen || '');
@@ -28,13 +26,13 @@ export default function GastoForm() {
   const [loading, setLoading] = useState(false);
   const [loadingConversion, setLoadingConversion] = useState(false);
   const [errors, setErrors] = useState({});
-  const [categorias, setCategorias] = useState([]); // Tu estado de categorías
+  const [categorias, setCategorias] = useState([]); 
 
   const debouncedMonto = useDebounce(monto, 500);
 
-  // --- EFECTOS (Tus compañeros + tuyos) ---
+  
   useEffect(() => {
-    // Carga cotizaciones
+    
     getCotizaciones()
       .then(data => {
         setCotizaciones(data);
@@ -44,11 +42,11 @@ export default function GastoForm() {
       })
       .catch(err => setErrors(prev => ({ ...prev, api: err.message })));
     
-    // Carga categorías
+    
     getCategorias().then(data => setCategorias(data));
-  }, []); // Un solo useEffect para cargar todo al inicio
+  }, []); 
 
-  // Efecto de 'main' para la conversión
+  
   useEffect(() => {
     setMontoConvertido(null);
     setErrors(prev => ({ ...prev, conversion: null }));
@@ -61,18 +59,18 @@ export default function GastoForm() {
     }
   }, [debouncedMonto, moneda, tipoConversion]);
 
-  // --- HANDLERS ---
+  
   const handleCategorySelect = (categoriaSeleccionada) => {
     setCategoria(categoriaSeleccionada.nombre);
     setImagen(categoriaSeleccionada.imagen);
   }
 
-  // HandleSubmit fusionado
+  
   const handleSubmit = async () => {
     setLoading(true);
     setErrors({});
     
-    // Validación fusionada (ahora incluye 'nombre')
+   
     if (!nombre || !categoria || !monto || !fecha) {
       setErrors({
         nombre: !nombre,
@@ -85,7 +83,7 @@ export default function GastoForm() {
     }
 
     const gastoParaGuardar = {
-      nombre, // <<< TU CAMPO DE NOMBRE
+      nombre, 
       categoria,
       fecha,
       imagen: imagen || null,
@@ -107,7 +105,7 @@ export default function GastoForm() {
   };
     
   return (
-    // ScrollView con 'style' corregido, no 'contentContainerStyle'
+    
     <ScrollView style={{ flex: 1, backgroundColor: '#fff' }} contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <Text style={styles.titulo}>{gastoData?.id ? 'Editar' : 'Agregar'} Gasto</Text>
@@ -115,7 +113,7 @@ export default function GastoForm() {
       
       <View style={styles.formContainer} >
         
-        {/* === CAMPO DE NOMBRE (RE-AGREGADO) === */}
+        
         <Input 
           placeholder="Nombre del Gasto (Ej: Netflix, Supermercado)" 
           value={nombre} 
@@ -123,7 +121,7 @@ export default function GastoForm() {
           errorMessage={errors?.nombre ? 'Requerido' : ''}
         />
 
-        {/* === TU FEATURE DE CATEGORÍAS (INTACTA) === */}
+       
         <View style={styles.categoryLabelContainer}>
           <Text style={styles.titulo}>Categoría</Text>
           <Text style={styles.seleccionadaLabel}>
@@ -151,9 +149,7 @@ export default function GastoForm() {
             onPress={() => navigation.navigate('CategoryForm')}
           />
         </View>
-        {/* === FIN DE TU FEATURE === */}
-
-        {/* Campo de Fecha */}
+        
         <Input 
           placeholder="Fecha (YYYY-MM-DD)" 
           value={fecha} 
@@ -161,8 +157,7 @@ export default function GastoForm() {
           errorMessage={errors?.fecha ? 'Requerido' : ''}
         />
 
-        {/* === FEATURE DE MONEDA (INTACTA) === */}
-        {/* Ahora SÍ debería ser visible gracias al ScrollView corregido */}
+        
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: 10 }}>
           <Text style={{ fontSize: 18, color: moneda === 'ARS' ? 'black' : 'grey' }}>ARS</Text>
           <Switch
@@ -193,7 +188,7 @@ export default function GastoForm() {
             </Picker>
           </>
         )}
-        {/* === FIN FEATURE MONEDA === */}
+       
 
         {loadingConversion && <ActivityIndicator size="small" />}
         {montoConvertido !== null && !loadingConversion && (
@@ -204,7 +199,7 @@ export default function GastoForm() {
         {errors?.api && <Text style={{ color: 'red', textAlign: 'center', margin: 10 }}>Error: {errors.api}</Text>}
         {errors?.conversion && <Text style={{ color: 'red', textAlign: 'center', margin: 10 }}>Error: {errors.conversion}</Text>}
 
-        {/* Botones */}
+        
         <View style={styles.buttons}>
           <Button title="Guardar" onPress={handleSubmit} disabled={loading} />
           <Button title="Cancelar" onPress={() => navigation.goBack()} color="grey" />
