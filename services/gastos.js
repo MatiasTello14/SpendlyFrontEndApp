@@ -49,6 +49,7 @@ const categoria = getRandomCategoria();
 };
 
 let gastos = Array.from({ length: MAX_GASTOS }, (_, i) => generarGasto(i + 1));
+let nextId = MAX_GASTOS + 1;
 
 const getGastos = () => {
   return new Promise((resolve) => {
