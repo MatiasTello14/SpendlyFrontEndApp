@@ -1,11 +1,11 @@
-
-import { View, Text, Button, Image, TouchableOpacity } from 'react-native';
+// components/gasto/index.js
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Card } from '@rneui/themed';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Gasto({ gasto }) {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View>
@@ -15,24 +15,25 @@ export default function Gasto({ gasto }) {
             <Image style={styles.imagen} source={{ uri: gasto.imagen }} />
 
             <View style={styles.infoContainer}>
-              <Text style={styles.nombre}>{gasto.nombre}</Text>
+              {/* CORREGIDO: Usamos 'categoria' en lugar de 'nombre' */}
+              <Text style={styles.nombre}>{gasto.categoria}</Text>
               <Text style={styles.fecha}>{gasto.fecha}</Text>
+              
+              {/* NUEVO: Mostrar monto original si es USD */}
+              {gasto.moneda === 'USD' && (
+                <Text style={styles.monedaOriginal}>
+                  (${gasto.monto} USD)
+                </Text>
+              )}
             </View>
-            <Text style={styles.monto}>${gasto.monto}</Text>
-          </View>
 
-          <Card.Divider />
-          <View style={styles.buttons}>
-            <Button
-              title="✏️ Editar"
-              color="#FFA500" />
-            <Button
-              title="🗑️ Eliminar"
-              color="#FF4500" />
+            {/* CORREGIDO: Usamos montoEnARS */}
+            <Text style={styles.monto}>${gasto.montoEnARS}</Text>
           </View>
+          
+          {/* CORREGIDO: Quitamos los botones de Editar/Eliminar de la card */}
         </Card>
       </TouchableOpacity>
     </View>
   );
 }
-
