@@ -14,6 +14,7 @@ import styles  from './styles';
 export default function Home() {
 
     const [gastos, setGastos] = useState([]);
+    // ver ya no se usa
     const [showForm, setShowForm] = useState(false);
 
     const navigation = useNavigation()

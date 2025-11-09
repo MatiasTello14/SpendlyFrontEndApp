@@ -11,6 +11,8 @@ import Home from './screens/Home'
 import GastoForm from './screens/Form';
 import Details from './screens/Details';
 
+import CategoryForm from './screens/CategoryForm';
+
 
 console.log(Constants.statusBarHeigth)
 
@@ -28,6 +30,8 @@ export default function App() {
             <Stack.Screen name="Home" component={Home} options={{ title: 'Listado de Gastos' }} />
             <Stack.Screen name="Form" component={GastoForm} options={{ title: 'Agregar un gasto nuevo' }} />
             <Stack.Screen name="Details" component={Details} options={{ title: 'Detalle del gasto' }} />
+            <Stack.Screen name="CategoryForm" component={CategoryForm} options={{ title: 'Crear Nueva Categoría' }} 
+        />
           </Stack.Navigator>
         </NavigationContainer>
 
