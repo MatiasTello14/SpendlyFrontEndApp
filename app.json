@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "mis-gastitos",
-    "slug": "mis-gastitos",
+    "name": "spendly",
+    "slug": "spendly",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/spendlyLogo.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/spendlyLogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
