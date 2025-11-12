@@ -13,7 +13,7 @@ export default function GastoForm() {
   const navigation = useNavigation()
 
   
-  const [nombre, setNombre] = useState(gastoData?.nombre || ''); 
+  const [nombre, setNombre] = useState(gastoData?.nombre || '');
   const [categoria, setCategoria] = useState(gastoData?.categoria || '');
   const [fecha, setFecha] = useState(gastoData?.fecha || '');
   const [imagen, setImagen] = useState(gastoData?.imagen || '');
@@ -41,9 +41,15 @@ export default function GastoForm() {
         }
       })
       .catch(err => setErrors(prev => ({ ...prev, api: err.message })));
-    
-    
-    getCategorias().then(data => setCategorias(data));
+        
+    getCategorias()
+      .then(data => {
+        setCategorias(data);
+        if (!gastoData && data.length > 0) {
+          setCategoria(data[0].titulo);
+          setImagen(data[0].imagen);
+        }
+      })
   }, []); 
 
   
@@ -60,10 +66,13 @@ export default function GastoForm() {
   }, [debouncedMonto, moneda, tipoConversion]);
 
   
-  const handleCategorySelect = (categoriaSeleccionada) => {
-    setCategoria(categoriaSeleccionada.nombre);
-    setImagen(categoriaSeleccionada.imagen);
-  }
+  const handleCategorySelect = (categoriaTitulo) => {
+    const cat = categorias.find(c => c.nombre === categoriaTitulo);
+    if (cat) {
+      setCategoria(cat.nombre);
+      setImagen(cat.imagen);
+    }
+  };
 
   
   const handleSubmit = async () => {
@@ -72,12 +81,12 @@ export default function GastoForm() {
     
    
     if (!nombre || !categoria || !monto || !fecha) {
-      setErrors({
+        setErrors({
         nombre: !nombre,
         categoria: !categoria,
         monto: !monto,
         fecha: !fecha,
-      });
+    });
       setLoading(false);
       return;
     }
@@ -114,35 +123,22 @@ export default function GastoForm() {
       <View style={styles.formContainer} >
         
         
-        <Input 
-          placeholder="Nombre del Gasto (Ej: Netflix, Supermercado)" 
+        <Input placeholder="Descripcion del Gasto (Ej: Netflix, Supermercado)" 
           value={nombre} 
           onChangeText={setNombre}
           errorMessage={errors?.nombre ? 'Requerido' : ''}
         />
 
-       
-        <View style={styles.categoryLabelContainer}>
-          <Text style={styles.titulo}>Categoría</Text>
-          <Text style={styles.seleccionadaLabel}>
-            {categoria ? categoria : 'Ninguna'}
-          </Text>
-        </View>
-        <FlatList
-          data={categorias} 
-          horizontal
-          style={styles.categoryList}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity 
-              style={styles.categoryItem} 
-              onPress={() => handleCategorySelect(item)}
-            >
-              <Image source={{ uri: item.imagen }} style={styles.categoryImage} />
-              <Text style={styles.categoryText}>{item.nombre}</Text>
-            </TouchableOpacity>
-          )}
-        />
+        <Text style={{ fontSize: 16, marginLeft: 10, color: 'grey' }}>Categoría:</Text>
+        <Picker
+          selectedValue={categoria}
+          onValueChange={(itemValue) => handleCategorySelect(itemValue)}
+        >
+          {categorias.map(c => (
+            <Picker.Item key={c.id} label={c.nombre} value={c.nombre} />
+          ))}
+        </Picker>
+        
         <View style={styles.crearCategoriaButton}>
           <Button
             title="Crear Nueva Categoría"

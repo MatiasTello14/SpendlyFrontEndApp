@@ -17,7 +17,7 @@ export default function CategoryForm() {
   }
 
   return (
-    <View style={styles.container}> // 2. Usar estilos
+    <View style={styles.container}>
       <Text style={styles.titulo}>Nueva Categoría</Text>
       <Input placeholder="Nombre de la categoría" onChangeText={setNombre} />
       <Input placeholder="URL de la imagen" onChangeText={setImagen} />

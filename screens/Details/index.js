@@ -24,7 +24,7 @@ export default function Details() {
     const handleEliminar = () => {
       Alert.alert(
         "Eliminar Gasto",
-        `¿Estás seguro de que querés eliminar "${gasto.categoria}"?`,
+        `¿Estás seguro de que querés eliminar "${gasto.nombre}"?`,
         [
           { text: "Cancelar", style: "cancel" },
           { 
@@ -50,7 +50,6 @@ export default function Details() {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <Card containerStyle={styles.fullDetailCard}>
-                    {/* El video muestra el imageWrapper, lo mantenemos */}
                     <View style={styles.imageWrapper}>
                         <Image
                             source={{ uri: gasto.imagen }}
@@ -59,17 +58,13 @@ export default function Details() {
                         />
                     </View>
 
-                    {/* VISTA DE DETALLE ACTUALIZADA */}
                     <View style={styles.descripcionContainer}>
-                        {/* CORREGIDO: Usamos 'categoria' */}
-                        <Text style={styles.nombreDetalle}>{gasto.categoria}</Text>
-                        
-                        {/* CORREGIDO: Usamos 'montoEnARS' */}
+                        <Text style={styles.nombreDetalle}>{gasto.nombre}</Text>
+                        <Text style={styles.categoriaDetalle}>{gasto.categoria}</Text>
                         <Text style={styles.montoDetalle}>
                             Monto: <Text style={styles.montoValor}>${gasto.montoEnARS}</Text>
                         </Text>
 
-                        {/* NUEVO: Mostrar detalle de conversión */}
                         {gasto.moneda === 'USD' && (
                           <Text style={styles.categoriaDetalle}>
                             (Pagado como ${gasto.monto} USD vía {gasto.tipoConversion})
@@ -78,7 +73,6 @@ export default function Details() {
                         
                         <Text style={styles.fechaDetalle}>Fecha: {gasto.fecha}</Text>
                         
-                        {/* CORREGIDO: El campo 'categoria' ahora es el título */}
                         <Text style={styles.categoriaDetalle}>Categoría: {gasto.categoria}</Text>
                     </View>
                 </Card>
@@ -86,7 +80,6 @@ export default function Details() {
                 <View style={styles.buttonContainer}>
                     <Button
                         title="✏️ Editar"
-                        // CORREGIDO: Pasamos el gasto completo al Form
                         onPress={() => navigation.navigate('Form', { gastoData: gasto })}
                         color="#FFA500"
                     />

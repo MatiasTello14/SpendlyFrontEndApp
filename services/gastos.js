@@ -24,6 +24,16 @@ const imagenesCategorias = {
   Salud: 'https://cdn-icons-png.flaticon.com/512/2221/2221756.png',
 };
 
+const nombresGastos = {
+  Comida: ['Supermercado', 'Restaurante', 'Delivery'],
+  Transporte: ['Uber', 'Nafta', 'SUBE'],
+  Entretenimiento: ['Cine', 'Netflix', 'PSN'],
+  Hogar: ['Alquiler', 'Expensas', 'Metrogas'],
+  Educación: ['Pago ORT', 'Compra libro'],
+  Salud: ['Farmacia', 'Obra Social']
+};
+
+
 const getRandomCategoria = () => categorias[random(0, categorias.length - 1)];
 const getRandomMonto = () => random(500, 5000);
 const getRandomFecha = () => {
@@ -33,18 +43,24 @@ const getRandomFecha = () => {
 };
 
 const generarGasto = (id) => {
-const categoria = getRandomCategoria();
-  const monto = getRandomMonto(); // El monto aleatorio siempre es ARS
+
+  const categoria = getRandomCategoria();
+  const nombresPosibles = nombresGastos[categoria];
+  const nombre = nombresPosibles[random(0, nombresPosibles.length - 1)];
+  const monto = getRandomMonto();
+
+
   return {
     id,
-    categoria: categoria, // Usamos 'categoria' para alinear con el backend
+    nombre: nombre,
+    categoria: categoria,
     fecha: getRandomFecha(),
     imagen: imagenesCategorias[categoria],
     
-    montoEnARS: monto,    // El monto en ARS
-    monto: monto,         // El monto original que ingreso el usuario
-    moneda: "ARS",        // moneda
-    tipoConversion: null  // tipo conversion para usd
+    montoEnARS: monto,
+    monto: monto,
+    moneda: "ARS",
+    tipoConversion: null
   }
 };
 
@@ -61,7 +77,12 @@ const agregarGasto = (gasto) => {
 return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        const gastoProcesado = simularConversion(gasto); //conversion
+
+        if (!gasto.nombre || !gasto.categoria || !gasto.monto || !gasto.fecha) {
+           throw new Error("Datos incompletos. Se requieren nombre, categoria, monto y fecha.");
+        }
+        
+        const gastoProcesado = simularConversion(gasto);
         const nuevoGasto = { ...gastoProcesado, id: nextId++ };
         gastos.push(nuevoGasto);
         resolve(nuevoGasto);
@@ -132,9 +153,10 @@ const simularConversion = (data) => {
     }
 
     return {
+        nombre: data.nombre,
         categoria: data.categoria,
         fecha: data.fecha,
-        imagen: data.imagen || 'https://cdn-icons-png.flaticon.com/512/2221/2221756.png', // Imagen default
+        imagen: data.imagen,
         montoEnARS: Math.round(montoEnARS * 100) / 100,
         monto: monto,
         moneda: moneda,
