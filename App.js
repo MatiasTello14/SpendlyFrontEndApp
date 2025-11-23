@@ -15,6 +15,8 @@ import CategoryForm from './screens/CategoryForm';
 import CategoriasList from './screens/CategoryList';
 
 import LoginScreen from './screens/Login';
+import RegisterScreen from './screens/Register';
+
 
 console.log(Constants.statusBarHeight)
 
@@ -24,7 +26,6 @@ const AppNavigator = () => {
   const { userToken, isLoading } = useContext(AuthContext);
 
   if (isLoading) {
-    // Pantalla de carga inicial (Splash)
     return null; 
   }
 
@@ -32,13 +33,11 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {userToken == null ? (
-          // 🔒 PANTALLAS PUBLICAS (Si no hay token)
-          // <Stack.Screen name="Register" component={RegisterScreen} />
           <>
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
           </>
         ) : (
-          // 🔓 PANTALLAS PRIVADAS (Si hay token)
           <>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Form" component={GastoForm} options={{ title: 'Agregar un gasto nuevo' }} />
