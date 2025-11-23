@@ -5,10 +5,11 @@ import GastoFlatList from '../../components/gastoFlatList'
 import { StatusBar } from 'expo-status-bar';
 import { FAB } from '@rneui/base'
 import { getGastos } from '../../services/gastos'
-import {useState, useEffect, useCallback} from 'react'
+import {useState, useEffect, useCallback, useContext} from 'react'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import styles  from './styles';
 import { Picker } from '@react-native-picker/picker'
+import { AuthContext } from '../../hooks/useAuth'
 
 
 
@@ -23,6 +24,7 @@ export default function Home() {
 
     const navigation = useNavigation()
     
+    const { signOut } = useContext(AuthContext)
 
     useFocusEffect(useCallback(() => {
         getGastos().then((gastos) => {
@@ -70,6 +72,12 @@ export default function Home() {
                   type="font-awesome"
                   color="black"
                   onPress={() => setMostrarFiltro(!mostrarFiltro)}
+                />
+                <Icon
+                  name="logout"
+                  type="material-community" // O 'antdesign' si prefieres otro estilo
+                  color="black"
+                  onPress={signOut} // Llama a la función del contexto
                 />
               </View>
             </View>
