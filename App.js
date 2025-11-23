@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import Constants from 'expo-constants'
@@ -16,7 +16,7 @@ import CategoriasList from './screens/CategoryList';
 
 import LoginScreen from './screens/Login';
 
-console.log(Constants.statusBarHeigth)
+console.log(Constants.statusBarHeight)
 
 const Stack = createNativeStackNavigator();
 
@@ -33,9 +33,9 @@ const AppNavigator = () => {
       <Stack.Navigator>
         {userToken == null ? (
           // 🔒 PANTALLAS PUBLICAS (Si no hay token)
+          // <Stack.Screen name="Register" component={RegisterScreen} />
           <>
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
           </>
         ) : (
           // 🔓 PANTALLAS PRIVADAS (Si hay token)
