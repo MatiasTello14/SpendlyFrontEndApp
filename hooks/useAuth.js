@@ -7,10 +7,9 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [userToken, setUserToken] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
-    const [isLoading, setIsLoading] = useState(true); // Para mostrar un spinner mientras carga
+    const [isLoading, setIsLoading] = useState(true);
 
-    // 1. LOGICA DE SESIÓN (useEffect)
-    // Se ejecuta UNA vez al abrir la app para ver si ya hay sesión guardada
+    // ejecutamos una vez al abrir la app para ver si ya hay sesión guardada
     useEffect(() => {
         const checkLoginStatus = async () => {
             try {
@@ -24,35 +23,35 @@ export const AuthProvider = ({ children }) => {
             } catch (e) {
                 console.log('Error al recuperar sesión:', e);
             } finally {
-                setIsLoading(false); // Dejamos de cargar
+                setIsLoading(false)
             }
         };
 
         checkLoginStatus();
     }, []);
 
-    // 2. Función para Iniciar Sesión (Login)
+    
     const signIn = async (email, password) => {
         setIsLoading(true);
         try {
-            // A. Pedimos el token al backend
+            // token al backend
             const data = await loginService(email, password); 
             
-            // B. Guardamos en el dispositivo (Persistencia)
+            // persistimos la sesion
             await AsyncStorage.setItem('userToken', data.token);
             await AsyncStorage.setItem('userInfo', JSON.stringify(data.usuario));
 
-            // C. Actualizamos el estado de la app (React se entera)
+            // guardamos la info
             setUserToken(data.token);
             setUserInfo(data.usuario);
         } catch (error) {
-            throw error; // Le pasamos el error a la pantalla de Login para que muestre un alerta
+            throw error;
         } finally {
             setIsLoading(false);
         }
-    };
+    }
 
-    // 3. Función para Cerrar Sesión (Logout)
+    
     const signOut = async () => {
         setIsLoading(true);
         try {

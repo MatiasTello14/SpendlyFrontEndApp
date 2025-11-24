@@ -5,7 +5,7 @@ import GastoFlatList from '../../components/gastoFlatList'
 import { StatusBar } from 'expo-status-bar';
 import { FAB } from '@rneui/base'
 import { getGastos } from '../../services/gastos'
-import {useState, useEffect, useCallback, useContext} from 'react'
+import {useState, useCallback, useContext} from 'react'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import styles  from './styles';
 import { Picker } from '@react-native-picker/picker'

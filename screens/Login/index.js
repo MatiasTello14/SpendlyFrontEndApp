@@ -44,7 +44,7 @@ export default function LoginScreen({ navigation }) {
       <Button title="Ingresar" onPress={handleLogin} />
         <Button 
           title="Registrarse" 
-          onPress={() => navigation.navigate('Register')} // <-- Asegúrate que diga 'Register'
+          onPress={() => navigation.navigate('Register')}
           color="gray" 
         />
     </View>

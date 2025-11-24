@@ -8,7 +8,7 @@ export const getCategorias = async () => {
 };
 
 export const agregarCategoria = async (categoria) => {
-  // TU BACKEND ESPERA: { titulo, imagen }
+
   const body = { titulo: categoria.nombre, imagen: categoria.imagen };
   const { data } = await api.post("/categorias", body);
   return data;
