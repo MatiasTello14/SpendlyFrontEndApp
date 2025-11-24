@@ -8,6 +8,7 @@ import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/nativ
 import { useDebounce } from '../../hooks/useDebounce';
 import { getCategorias } from '../../services/categorias';
 import * as DocumentPicker from "expo-document-picker";
+import { formatFecha } from '../../utils/formatFecha';
 
 export default function GastoForm() {
   const { gastoData } = useRoute().params || {};
@@ -17,7 +18,7 @@ export default function GastoForm() {
   
   const [nombre, setNombre] = useState(gastoData?.nombre || '');
   const [categoria, setCategoria] = useState(gastoData?.categoria || '');
-  const [fecha, setFecha] = useState(gastoData?.fecha || '');
+  const [fecha, setFecha] = useState(() => formatFecha(gastoData?.fecha));
   const [imagen, setImagen] = useState(gastoData?.imagen || '');
   const [monto, setMonto] = useState(gastoData?.monto?.toString() || '');
   const [moneda, setMoneda] = useState(gastoData?.moneda || 'ARS');
