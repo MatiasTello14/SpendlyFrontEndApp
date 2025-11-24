@@ -6,30 +6,38 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   scrollViewContent: {
-     flexGrow: 1,
-     justifyContent: 'center',  
-     alignItems: 'center',      
-     padding: 15,
+    flexGrow: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
   imageContainer: {
     width: '100%',
     alignItems: 'center',
     marginTop: 20
   },
+  fullDetailCard: {
+    width: '100%',
+    margin: 0,
+    borderRadius: 18,
+    padding: 0,
+    overflow: 'hidden',
+    alignSelf: 'center',
+    maxWidth: 520,
+  },
   imageWrapper: {
-  width: "100%",
-  height: 220,               
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundColor: "#f7f7f7",
-  borderRadius: 12,
-  marginBottom: 15,
-},
+    width: '100%',
+    height: 260,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f7f7f7',
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
+  },
 
-detailImage: {
-  width: "100%",
-  height: "100%",
-},
+  detailImage: {
+    width: '100%',
+    height: '100%',
+  },
 
   infoCard: {
     width: '95%',
@@ -43,8 +51,7 @@ detailImage: {
   },
 
   descripcionContainer: {
-    alignItems: 'center',
-    gap: 8,
+    padding: 24,
   },
 
 
@@ -58,6 +65,7 @@ detailImage: {
   montoDetalle: {
     fontSize: 18,
     color: '#555',
+    marginBottom: 4,
   },
   montoValor: {
     fontSize: 22,
@@ -67,21 +75,28 @@ detailImage: {
   fechaDetalle: {
     fontSize: 16,
     color: '#777',
+    marginTop: 10,
   },
   categoriaDetalle: {
     fontSize: 16,
     color: '#777',
     fontStyle: 'italic',
+    marginTop: 6,
   },
 
   
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 15,
-    marginTop: 30,
-    width: '90%',
-  }
+    justifyContent: 'space-between',
+    marginTop: 20,
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
+  },
+  actionButton: {
+    flex: 1,
+    marginHorizontal: 5,
+  },
 });
 
 export default styles;

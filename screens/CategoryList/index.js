@@ -52,9 +52,14 @@ export default function CategoriasList() {
           <Text style={styles.titulo}>{item.titulo}</Text>
         </View>
 
-        <TouchableOpacity onPress={() => handleEliminar(item)}>
-          <Icon name="trash" type="font-awesome" color="#ff4d4d" size={22} />
-        </TouchableOpacity>
+        <View style={styles.actions}>
+          <TouchableOpacity onPress={() => navigation.navigate("CategoryForm", { categoria: item })}>
+            <Icon name="edit" type="font-awesome" color="#2e8b57" size={22} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleEliminar(item)}>
+            <Icon name="trash" type="font-awesome" color="#ff4d4d" size={22} />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
