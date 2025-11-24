@@ -59,11 +59,59 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 12,
   },
-  
-  crearCategoriaButton: {
+
+  categoryPreview: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#f7f7f7',
+    borderRadius: 14,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#e1e1e1',
+  },
+  categoryPreviewImage: {
+    width: 56,
+    height: 56,
+    borderRadius: 12,
+    marginRight: 15,
+    backgroundColor: '#fff',
+  },
+  categoryPreviewInfo: {
+    flex: 1,
+  },
+  categoryPreviewTitle: {
+    fontSize: 17,
+    fontWeight: '600',
+    color: '#333',
+  },
+  categoryPreviewHint: {
+    fontSize: 13,
+    color: '#888',
+    marginTop: 3,
+  },
+  categoryPreviewChevron: {
+    fontSize: 18,
+    color: '#999',
+    marginLeft: 8,
+  },
+  pickerWrapper: {
+    width: '100%',
     marginTop: 10,
-    marginBottom: 20,
-  }
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e1e1e1',
+    overflow: 'hidden',
+    paddingBottom: 10,
+  },
+  pickerActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12,
+    paddingHorizontal: 12,
+    paddingTop: 6,
+  },
 });
 
 

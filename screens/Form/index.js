@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { View, Text, Button, ScrollView, Switch, ActivityIndicator } from 'react-native';
+import { View, Text, Button, ScrollView, Switch, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
 import { Input } from '@rneui/themed';
 import { Picker } from '@react-native-picker/picker';
 import styles from './styles';
@@ -31,6 +31,7 @@ export default function GastoForm() {
   const [categorias, setCategorias] = useState([]); 
 
   const [archivo, setArchivo] = useState(null);
+  const [mostrarSelectorCategoria, setMostrarSelectorCategoria] = useState(false);
 
   const debouncedMonto = useDebounce(monto, 500);
 
@@ -54,8 +55,10 @@ export default function GastoForm() {
           .then(data => {
             setCategorias(data);
             if (!gastoData && data.length > 0) {
-              setCategoria(data[0].titulo || data[0].nombre);
-              setImagen(data[0].imagen);
+              const randomIndex = Math.floor(Math.random() * data.length);
+              const randomCategoria = data[randomIndex];
+              setCategoria(randomCategoria.titulo || randomCategoria.nombre);
+              setImagen(randomCategoria.imagen);
             }
           })
           .catch(err => console.log(err));
@@ -83,6 +86,7 @@ export default function GastoForm() {
         setCategoria(tituloFinal);
         setImagen(cat.imagen);
       }
+      setMostrarSelectorCategoria(false);
     };
 
   const handlePickFile = async () => {
@@ -168,29 +172,51 @@ export default function GastoForm() {
           errorMessage={errors?.nombre ? 'Requerido' : ''}
         />
 
-        <Text style={{ fontSize: 16, marginLeft: 10, color: 'grey' }}>Categoría:</Text>
-        <Picker
-          selectedValue={categoria}
-          onValueChange={(itemValue) => handleCategorySelect(itemValue)}
+        <Text style={{ fontSize: 16, marginLeft: 10, color: 'grey', marginBottom: 6 }}>Categoría:</Text>
+        <TouchableOpacity
+          style={styles.categoryPreview}
+          onPress={() => setMostrarSelectorCategoria(true)}
+          activeOpacity={0.8}
         >
-          {Array.isArray(categorias) && categorias.map(c => {
-            const titulo = c.titulo || c.nombre;   // <-- fallback
-            return (
-              <Picker.Item
-                key={(c._id || c.id).toString()}
-                label={titulo}
-                value={titulo}
-              />
-            );
-          })}
-        </Picker>
-        
-        <View style={styles.crearCategoriaButton}>
-          <Button
-            title="Crear Nueva Categoría"
-            onPress={() => navigation.navigate('CategoryForm')}
+          <Image
+            source={{ uri: imagen || 'https://cdn-icons-png.flaticon.com/512/3917/3917188.png' }}
+            style={styles.categoryPreviewImage}
           />
-        </View>
+          <View style={styles.categoryPreviewInfo}>
+            <Text style={styles.categoryPreviewTitle}>
+              {categoria || 'Elegí una categoría'}
+            </Text>
+            <Text style={styles.categoryPreviewHint}>Tocá para cambiarla</Text>
+          </View>
+          <Text style={styles.categoryPreviewChevron}>▾</Text>
+        </TouchableOpacity>
+
+        {mostrarSelectorCategoria && (
+          <View style={styles.pickerWrapper}>
+            <Picker
+              selectedValue={categoria}
+              onValueChange={(itemValue) => handleCategorySelect(itemValue)}
+            >
+              {Array.isArray(categorias) && categorias.map(c => {
+                const titulo = c.titulo || c.nombre;
+                return (
+                  <Picker.Item
+                    key={(c._id || c.id).toString()}
+                    label={titulo}
+                    value={titulo}
+                  />
+                );
+              })}
+            </Picker>
+            <View style={styles.pickerActions}>
+              <Button
+                title="Crear nueva categoría"
+                onPress={() => navigation.navigate('CategoryForm')}
+              />
+              <Button title="Listo" onPress={() => setMostrarSelectorCategoria(false)} />
+            </View>
+          </View>
+        )}
         
         <Input 
           placeholder="Fecha (YYYY-MM-DD)" 
