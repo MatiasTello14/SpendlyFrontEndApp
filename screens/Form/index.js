@@ -10,8 +10,9 @@ import { getCategorias } from '../../services/categorias';
 import * as DocumentPicker from "expo-document-picker";
 
 export default function GastoForm() {
-  const { gastoData } = useRoute().params || {}
-  const navigation = useNavigation()
+  const { gastoData } = useRoute().params || {};
+  const navigation = useNavigation();
+  const gastoId = gastoData?._id || gastoData?.id;
 
   
   const [nombre, setNombre] = useState(gastoData?.nombre || '');
@@ -139,8 +140,8 @@ export default function GastoForm() {
   }
 
   try {
-    if (gastoData?.id) {
-      await actualizarGasto(gastoData.id, formData);   
+    if (gastoId) {
+      await actualizarGasto(gastoId, formData);   
     } else {
       await agregarGasto(formData);                   
     }
@@ -155,7 +156,7 @@ export default function GastoForm() {
     
     <ScrollView style={{ flex: 1, backgroundColor: '#fff' }} contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.titulo}>{gastoData?.id ? 'Editar' : 'Agregar'} Gasto</Text>
+        <Text style={styles.titulo}>{gastoId ? 'Editar' : 'Agregar'} Gasto</Text>
       </View>
       
       <View style={styles.formContainer} >

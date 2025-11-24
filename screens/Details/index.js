@@ -73,7 +73,7 @@ export default function Details() {
                         )}
 
                         {/* Fecha */}
-                        <Text style={styles.fecha}>{formatFecha(gasto.fecha)}</Text>
+                        <Text style={styles.fechaDetalle}>{formatFecha(gasto.fecha)}</Text>
                         
                         <Text style={styles.categoriaDetalle}>Categoría: {gasto.categoria}</Text>
 
@@ -86,16 +86,20 @@ export default function Details() {
                 </Card>
 
                 <View style={styles.buttonContainer}>
-                    <Button
-                        title="✏️ Editar"
-                        onPress={() => navigation.navigate('Form', { gastoData: gasto })}
-                        color="#FFA500"
-                    />
-                    <Button
-                        title="🗑️ Eliminar"
-                        onPress={handleEliminar}
-                        color="#FF4500"
-                    />
+                    <View style={styles.actionButton}>
+                        <Button
+                            title="✏️ Editar"
+                            onPress={() => navigation.navigate('Form', { gastoData: gasto })}
+                            color="#FFA500"
+                        />
+                    </View>
+                    <View style={styles.actionButton}>
+                        <Button
+                            title="🗑️ Eliminar"
+                            onPress={handleEliminar}
+                            color="#FF4500"
+                        />
+                    </View>
                 </View>
             </ScrollView>
         </View>
