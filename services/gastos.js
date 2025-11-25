@@ -138,14 +138,11 @@ const getCotizaciones = async () => {
   }
 };
 
-
 const getConversion = async (monto, moneda, tipoConversion) => {
   try {
-    const res = await api.post("/dolar/convertir", {
-      monto,
-      moneda,
-      tipoConversion
-    });
+    const res = await api.get(
+      `/dolar/convertir?monto=${monto}&moneda=${moneda}&tipoConversion=${tipoConversion}`
+    );
     return res.data;
   } catch (error) {
     throw new Error(error.response?.data?.error || "Error en conversión");
