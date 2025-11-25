@@ -4,6 +4,7 @@ import { Card } from '@rneui/themed';
 import { getGastoById, eliminarGasto } from '../../services/gastos';
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import styles from './styles';
+import { formatFecha } from "../../utils/formatFecha";
 
 export default function Details() {
     const { id } = useRoute().params;
@@ -24,7 +25,7 @@ export default function Details() {
     const handleEliminar = () => {
       Alert.alert(
         "Eliminar Gasto",
-        `¿Estás seguro de que querés eliminar "${gasto.categoria}"?`,
+        `¿Estás seguro de que querés eliminar "${gasto.nombre}"?`,
         [
           { text: "Cancelar", style: "cancel" },
           { 
@@ -46,11 +47,11 @@ export default function Details() {
         return <ActivityIndicator style={{ flex: 1 }} size="large" />
     }
 
+    
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <Card containerStyle={styles.fullDetailCard}>
-                    {/* El video muestra el imageWrapper, lo mantenemos */}
                     <View style={styles.imageWrapper}>
                         <Image
                             source={{ uri: gasto.imagen }}
@@ -59,42 +60,46 @@ export default function Details() {
                         />
                     </View>
 
-                    {/* VISTA DE DETALLE ACTUALIZADA */}
                     <View style={styles.descripcionContainer}>
-                        {/* CORREGIDO: Usamos 'categoria' */}
-                        <Text style={styles.nombreDetalle}>{gasto.categoria}</Text>
-                        
-                        {/* CORREGIDO: Usamos 'montoEnARS' */}
+                        <Text style={styles.nombreDetalle}>{gasto.nombre}</Text>
                         <Text style={styles.montoDetalle}>
                             Monto: <Text style={styles.montoValor}>${gasto.montoEnARS}</Text>
                         </Text>
 
-                        {/* NUEVO: Mostrar detalle de conversión */}
                         {gasto.moneda === 'USD' && (
-                          <Text style={styles.categoriaDetalle}>
+                            <Text style={styles.categoriaDetalle}>
                             (Pagado como ${gasto.monto} USD vía {gasto.tipoConversion})
-                          </Text>
+                            </Text>
                         )}
+
+                        {/* Fecha */}
+                        <Text style={styles.fechaDetalle}>{formatFecha(gasto.fecha)}</Text>
                         
-                        <Text style={styles.fechaDetalle}>Fecha: {gasto.fecha}</Text>
-                        
-                        {/* CORREGIDO: El campo 'categoria' ahora es el título */}
                         <Text style={styles.categoriaDetalle}>Categoría: {gasto.categoria}</Text>
+
+                        {gasto.archivo && (
+                        <Text style={styles.categoriaDetalle}>
+                            Archivo adjunto: {gasto.archivo}
+                        </Text>
+)}
                     </View>
                 </Card>
 
                 <View style={styles.buttonContainer}>
-                    <Button
-                        title="✏️ Editar"
-                        // CORREGIDO: Pasamos el gasto completo al Form
-                        onPress={() => navigation.navigate('Form', { gastoData: gasto })}
-                        color="#FFA500"
-                    />
-                    <Button
-                        title="🗑️ Eliminar"
-                        onPress={handleEliminar}
-                        color="#FF4500"
-                    />
+                    <View style={styles.actionButton}>
+                        <Button
+                            title="✏️ Editar"
+                            onPress={() => navigation.navigate('Form', { gastoData: gasto })}
+                            color="#FFA500"
+                        />
+                    </View>
+                    <View style={styles.actionButton}>
+                        <Button
+                            title="🗑️ Eliminar"
+                            onPress={handleEliminar}
+                            color="#FF4500"
+                        />
+                    </View>
                 </View>
             </ScrollView>
         </View>

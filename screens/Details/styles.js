@@ -6,21 +6,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   scrollViewContent: {
-    padding: 15,
-    alignItems: 'center',
+    flexGrow: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
   imageContainer: {
     width: '100%',
     alignItems: 'center',
     marginTop: 20
   },
+  fullDetailCard: {
+    width: '100%',
+    margin: 0,
+    borderRadius: 18,
+    padding: 0,
+    overflow: 'hidden',
+    alignSelf: 'center',
+    maxWidth: 520,
+  },
+  imageWrapper: {
+    width: '100%',
+    height: 260,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f7f7f7',
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
+  },
+
   detailImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#ddd'
+    width: '100%',
+    height: '100%',
   },
 
   infoCard: {
@@ -35,11 +51,10 @@ const styles = StyleSheet.create({
   },
 
   descripcionContainer: {
-    alignItems: 'center',
-    gap: 8,
+    padding: 24,
   },
 
-  // Estilos de Tipografía
+
   nombreDetalle: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -50,6 +65,7 @@ const styles = StyleSheet.create({
   montoDetalle: {
     fontSize: 18,
     color: '#555',
+    marginBottom: 4,
   },
   montoValor: {
     fontSize: 22,
@@ -59,21 +75,28 @@ const styles = StyleSheet.create({
   fechaDetalle: {
     fontSize: 16,
     color: '#777',
+    marginTop: 10,
   },
   categoriaDetalle: {
     fontSize: 16,
     color: '#777',
     fontStyle: 'italic',
+    marginTop: 6,
   },
 
-  // Contenedor de Botones
+  
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 15,
-    marginTop: 30,
-    width: '90%',
-  }
+    justifyContent: 'space-between',
+    marginTop: 20,
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
+  },
+  actionButton: {
+    flex: 1,
+    marginHorizontal: 5,
+  },
 });
 
 export default styles;
