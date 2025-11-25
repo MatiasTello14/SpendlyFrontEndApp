@@ -3,6 +3,7 @@ import { Card } from '@rneui/themed';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { formatFecha } from "../../utils/formatFecha";
+import { formatMontoArs } from "../../utils/formatCurrency";
 
 export default function Gasto({ gasto }) {
   const navigation = useNavigation();
@@ -26,7 +27,7 @@ export default function Gasto({ gasto }) {
               )}
             </View>
 
-            <Text style={styles.monto}>${gasto.montoEnARS}</Text>
+            <Text style={styles.monto}>${formatMontoArs(gasto.montoEnARS)}</Text>
           </View>
 
         </Card>
