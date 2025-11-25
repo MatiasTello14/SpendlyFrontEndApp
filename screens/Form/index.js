@@ -9,6 +9,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { getCategorias } from '../../services/categorias';
 import * as DocumentPicker from "expo-document-picker";
 import { formatFecha } from '../../utils/formatFecha';
+import { formatMontoArs } from '../../utils/formatCurrency';
 
 export default function GastoForm() {
   const { gastoData } = useRoute().params || {};
@@ -272,7 +273,7 @@ export default function GastoForm() {
         {loadingConversion && <ActivityIndicator size="small" />}
         {montoConvertido !== null && !loadingConversion && (
           <Text style={{ textAlign: 'center', fontSize: 18, marginVertical: 10 }}>
-            Equivale a: <Text style={{ fontWeight: 'bold' }}>${montoConvertido} ARS</Text>
+            Equivale a: <Text style={{ fontWeight: 'bold' }}>${formatMontoArs(montoConvertido)} ARS</Text>
           </Text>
         )}
         {errors?.api && <Text style={{ color: 'red', textAlign: 'center', margin: 10 }}>Error: {errors.api}</Text>}

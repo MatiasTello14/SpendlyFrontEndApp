@@ -5,6 +5,7 @@ import { getGastoById, eliminarGasto } from '../../services/gastos';
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import styles from './styles';
 import { formatFecha } from "../../utils/formatFecha";
+import { formatMontoArs } from "../../utils/formatCurrency";
 
 export default function Details() {
     const { id } = useRoute().params;
@@ -63,7 +64,7 @@ export default function Details() {
                     <View style={styles.descripcionContainer}>
                         <Text style={styles.nombreDetalle}>{gasto.nombre}</Text>
                         <Text style={styles.montoDetalle}>
-                            Monto: <Text style={styles.montoValor}>${gasto.montoEnARS}</Text>
+                            Monto: <Text style={styles.montoValor}>${formatMontoArs(gasto.montoEnARS)}</Text>
                         </Text>
 
                         {gasto.moneda === 'USD' && (
