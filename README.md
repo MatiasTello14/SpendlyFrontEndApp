@@ -114,4 +114,4 @@ src/
 
 -----
 
-*Proyecto realizado para la materia Programacion en Nuevas Tecnologias - 2025 2C.*
+*Proyecto realizado para la materia Programacion en Nuevas Tecnologias 2 - 2025 2C.*
