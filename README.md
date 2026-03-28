@@ -7,13 +7,13 @@ Este repositorio contiene el código fuente del **Frontend** (Cliente móvil).
 ## 📱 Características Principales
 
 <p align="center">
-  <img src="<img width="358" height="767" alt="login" src="https://github.com/user-attachments/assets/454a9b33-a14a-4b27-9762-7b16a2e7b844" />" width="250" />
-  <img src="<img width="370" height="780" alt="Lista de gastos" src="https://github.com/user-attachments/assets/adb4da43-7228-4c4a-ad2d-3470aec268ee" />" width="250" />
-  <img src="<img width="313" height="678" alt="detalle del gasto" src="https://github.com/user-attachments/assets/e3f56e12-61a2-4c1c-aaf6-808e44ca5f5a" />" width="250" />
-  <img src="<img width="301" height="660" alt="editar gasto" src="https://github.com/user-attachments/assets/f3e17931-4ce9-4625-8f11-26a6a6e480a2" />" />
-  <img src="<img width="387" height="818" alt="Agregar gastos" src="https://github.com/user-attachments/assets/0c9367fd-b55e-4682-9af6-2c4dd86649c2" />" />
-  <img src="<img width="306" height="667" alt="administrar categorias" src="https://github.com/user-attachments/assets/fc7354d0-ecb9-49fc-89d9-45443fa7c747" />" width="250" />
-  <img src="<img width="289" height="651" alt="crear - editar categoria" src="https://github.com/user-attachments/assets/5b751f14-38ca-4f5e-810a-24d3be054a98" />" width="250" />
+  <img src="https://github.com/user-attachments/assets/454a9b33-a14a-4b27-9762-7b16a2e7b844" width="200" style="margin: 10px;" alt="login" />
+  <img src="https://github.com/user-attachments/assets/adb4da43-7228-4c4a-ad2d-3470aec268ee" width="200" style="margin: 10px;" alt="lista" />
+  <img src="https://github.com/user-attachments/assets/e3f56e12-61a2-4c1c-aaf6-808e44ca5f5a" width="200" style="margin: 10px;" alt="detalle" />
+  <img src="https://github.com/user-attachments/assets/f3e17931-4ce9-4625-8f11-26a6a6e480a2" width="200" style="margin: 10px;" alt="editar" />
+  <img src="https://github.com/user-attachments/assets/0c9367fd-b55e-4682-9af6-2c4dd86649c2" width="200" style="margin: 10px;" alt="agregar" />
+  <img src="https://github.com/user-attachments/assets/fc7354d0-ecb9-49fc-89d9-45443fa7c747" width="200" style="margin: 10px;" alt="categorias" />
+  <img src="https://github.com/user-attachments/assets/5b751f14-38ca-4f5e-810a-24d3be054a98" width="200" style="margin: 10px;" alt="crear_categoria" />
 </p>
 
 
