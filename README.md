@@ -1,5 +1,9 @@
 # 💸 Spendly - Frontend App
 
+**Spendly** es una aplicación móvil para la gestión de finanzas personales desarrollada con **React Native** y **Expo**. Permite a los usuarios registrar sus gastos, organizarlos por categorías personalizadas, adjuntar comprobantes y visualizar conversiones de moneda en tiempo real.
+
+Este repositorio contiene el código fuente del **Frontend** (Cliente móvil). Para el codigo **Backend** visitar el siguiente link https://github.com/MatiasTello14/SpendlyBackendApp
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/454a9b33-a14a-4b27-9762-7b16a2e7b844" width="200" style="margin: 10px;" alt="login" />
   <img src="https://github.com/user-attachments/assets/adb4da43-7228-4c4a-ad2d-3470aec268ee" width="200" style="margin: 10px;" alt="lista" />
@@ -10,9 +14,6 @@
   <img src="https://github.com/user-attachments/assets/5b751f14-38ca-4f5e-810a-24d3be054a98" width="200" style="margin: 10px;" alt="crear_categoria" />
 </p>
 
-**Spendly** es una aplicación móvil para la gestión de finanzas personales desarrollada con **React Native** y **Expo**. Permite a los usuarios registrar sus gastos, organizarlos por categorías personalizadas, adjuntar comprobantes y visualizar conversiones de moneda en tiempo real.
-
-Este repositorio contiene el código fuente del **Frontend** (Cliente móvil).
 
 ## 📱 Características Principales
 
